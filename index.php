@@ -7,3 +7,11 @@
  */
 
 ?>
+<html>
+    <head>
+        <title>X</title>
+    </head>
+    <body>
+        
+    </body>
+</html>
