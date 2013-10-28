@@ -37,3 +37,35 @@
 #main_wrap .main_title h1{
     margin-top: 0;
 }
+
+#main_wrap .wrap_view .jumbotron{
+    padding: 15px 8px;
+}
+
+#main_panel #main_panel_edad .panel_view_form,
+#main_panel #main_panel_resident .panel_view_form{
+    padding: 15px 5px 5px 4px;
+    min-height: 75px;
+}
+
+#main_panel .panel_view_form.floating{
+    float: left;
+    width: 33.33%;
+    height: 100%;
+}
+
+#main_panel .panel_view_form .input-group{
+    margin: 5px 0;
+}
+
+#main_panel .panel_view_form > h4{
+    margin-left: 15px;
+    color: grey;
+    display: inline-block;
+    border-bottom: 1px dotted gray;
+}
+
+#main_panel_edad #wrap_itc,
+#main_panel_resident #wrap_itc{
+    height: 270px;
+}

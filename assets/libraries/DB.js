@@ -374,7 +374,7 @@
                     
                     $(insert_rows).each(function(i, insert){
                         tx.executeSql('INSERT INTO DATOS_EST VALUES ' + insert, [], function(){
-                            console.log('Record ' + i + ' saved.');
+                            //console.log('Record ' + i + ' saved.');
                         });
                     });
                     
@@ -410,7 +410,7 @@
                     throw "Invalid SQL script";
                 }
                 
-                this.DB.transaction(function(){
+                this.DB.transaction(function(tx){
                     tx.executeSql(o.sql, o.data, function(){
                         if($.isFunction(o.onSuccess)){
                             o.onSuccess.apply(o.me, arguments);

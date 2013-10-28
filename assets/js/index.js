@@ -28,11 +28,21 @@ $(function(){
             });
         },
         events: function(){
-            $(document).delegate();
+            $(document).delegate('#main_menu a', 'click', this.behaviors.general.onSelectView);
         },
         behaviors: {
             general: {
-                
+                onSelectView: function(){
+                    var link = $(this);
+                    link.parent().addClass('active').siblings().removeClass('active');
+                    
+                    if(link.data('for') === 'index'){
+                        $('#main_panel div.lead').html('');
+                    }
+                    else{
+                        $('#main_panel div.lead').load('views/' + link.data('for'));
+                    }
+                }
             },
             DB: {
                 onCreated: function(){

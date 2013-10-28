@@ -47,7 +47,6 @@
         },
         
         destroy: function() {
-            console.log('destr');
             this.element.hide();
             $.Widget.prototype.destroy.call( this );
         }

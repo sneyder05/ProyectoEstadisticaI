@@ -25,16 +25,18 @@
                         <a class="navbar-brand" href="javascript:">I.T.C</a>
                     </div>
                     <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="javascript:">Inicio</a></li>
-                            <li><a href="javascript:">Acerca de...</a></li>
+                        <ul id="main_menu" class="nav navbar-nav">
+                            <li class="active"><a href="javascript:" data-for="index">Inicio</a></li>
+                            <li><a href="javascript:" data-for="edad.html">Cuantitativa Continua</a></li>
+                            <li><a href="javascript:" data-for="resident.html">Cuantitativa Discreta</a></li>
+                            <li><a href="javascript:" data-for="acercade.html">Acerca de...</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div id="main_panel" class="container">
                 <div class="page-header main_title">
-                    <h1>Indicadores de Tendencia Central &amp; Gr&aacute;ficas</h1>
+                    <h2>Indicadores de Tendencia Central & Variabilidad &amp; Gr&aacute;ficas</h2>
                 </div>
                 <div class="lead">
                     
@@ -51,6 +53,7 @@
         <!-- INCLUDE JS FILES -->
         <script src="assets/libraries/jquery.10.js"></script>
         <script src="assets/libraries/jquery.widget.js"></script>
+        <script src="assets/js/Global.js"></script>
         <script src="assets/libraries/DB.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/libraries/tbProgressBar.js"></script>
