@@ -38,7 +38,7 @@ $(function(){
                         var pearson = (3 * (media - mediana)) / desviacionEst;
                         $('#txtCoeficientePearson').val(pearson).next().children('a').attr('data-original-title', Int.Residen.CoeficientePearson(pearson)).html(pearson.toFixed(Global.NFIX));
                         
-                        Resident.pp.progressBar.tbProgressbar('option','value',100);
+                        Resident.behaviors.DB.drawGraphics();
                     };
                     
                     var getCoeficienteVariacion = function(desviacionEst, media){
@@ -166,6 +166,68 @@ $(function(){
                             }
                             
                             getModa();
+                        }
+                    });
+                },
+                drawGraphics: function(){
+                    Resident.pp.progressBar.tbProgressbar('option','value',10);
+                    
+                    $.DB.execute({
+                        sql: 'SELECT RESIDENT, COUNT(RESIDENT) AS XI, ((COUNT(RESIDENT) * 100.0) / (SELECT COUNT(RESIDENT) FROM DATOS_EST)) AS HI FROM DATOS_EST GROUP BY RESIDENT ORDER BY RESIDENT',
+                        onSuccess: function(SQLTr, SQLRs){
+                            if(SQLRs.rows.length > 0){
+                                var categories = [], series = [];
+                                
+                                for(var i = 0; i < SQLRs.rows.length; i++){
+                                    var row = SQLRs.rows.item(i);
+                                    var resident = row.RESIDENT;
+                                    var xi = row.XI;
+                                    var hi = row.HI;
+                                    
+                                    categories.push(resident);
+                                    series.push(hi);
+                                }
+                                
+                                $('#graphic_1').highcharts({
+                                    chart: {
+                                        type: 'column'
+                                    },
+                                    title: {
+                                        text: 'Titulo'
+                                    },
+                                    subtitle: {
+                                        text: 'Subtiulo'
+                                    },
+                                    xAxis: {
+                                        categories: categories
+                                    },
+                                    yAxis: {
+                                        min: 0,
+                                        title: {
+                                            text: null
+                                        }
+                                    },
+                                    tooltip: {
+                                        enabled: false
+                                    },
+                                    plotOptions: {
+                                        column: {
+                                            pointPadding: 0.2,
+                                            borderWidth: 0
+                                        }
+                                    },
+                                    series: [{
+                                        name: 'Numero de personas en el hogar',
+                                        data: series
+
+                                    }]
+                                });
+                            }
+                            else{
+                                alert('No hay datos para graficar');
+                            }
+                            
+                            Resident.pp.progressBar.tbProgressbar('option','value',100);
                         }
                     });
                 }

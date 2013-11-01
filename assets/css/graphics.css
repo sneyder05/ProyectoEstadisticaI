@@ -1,0 +1,11 @@
+/*
+ * Sneyder Navia
+ * fabiansneyder@gmail.com
+ * Copyright 2013
+*/
+
+#main_panel_resident #graphic_1{
+    min-width: 100px; 
+    height: 400px; 
+    margin: 0 auto
+}
