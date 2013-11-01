@@ -55,6 +55,7 @@
         <script src="assets/libraries/jquery.widget.js"></script>
         <script src="assets/js/Global.js"></script>
         <script src="assets/libraries/DB.js"></script>
+        <script src="assets/libraries/highcharts/js/highcharts.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/libraries/tbProgressBar.js"></script>
         <script src="assets/js/index.js"></script>
