@@ -7,7 +7,8 @@ var Resident;
 $(function(){
     Resident = {
         pp: {
-            progressBar: null
+            progressBar: null,
+            tableInfo: []
         },
         init: function(){
             this.load();
@@ -27,7 +28,7 @@ $(function(){
             this.behaviors.DB.getITC_IV();
         },
         events: function(){
-            
+            $(document).delegate('#btnViewResidentTable', 'click', this.behaviors.general.onClickViewTable);
         },
         behaviors: {
             DB: {
@@ -176,7 +177,7 @@ $(function(){
                         sql: 'SELECT RESIDENT, COUNT(RESIDENT) AS XI, ((COUNT(RESIDENT) * 100.0) / (SELECT COUNT(RESIDENT) FROM DATOS_EST)) AS HI FROM DATOS_EST GROUP BY RESIDENT ORDER BY RESIDENT',
                         onSuccess: function(SQLTr, SQLRs){
                             if(SQLRs.rows.length > 0){
-                                var categories = [], series = [];
+                                var categories = [], series = [], pieSeries = [];
                                 
                                 for(var i = 0; i < SQLRs.rows.length; i++){
                                     var row = SQLRs.rows.item(i);
@@ -186,6 +187,9 @@ $(function(){
                                     
                                     categories.push(resident);
                                     series.push(hi);
+                                    pieSeries.push(['' + resident, hi]);
+                                    
+                                    Resident.pp.tableInfo.push([resident, xi, hi]);
                                 }
                                 
                                 $('#graphic_1').highcharts({
@@ -193,10 +197,10 @@ $(function(){
                                         type: 'column'
                                     },
                                     title: {
-                                        text: 'Titulo'
+                                        text: 'Diagrama de barras del numero de personas en el hogar'
                                     },
                                     subtitle: {
-                                        text: 'Subtiulo'
+                                        text: 'Fte: Investigacion en clase de estadistica y probabilidad'
                                     },
                                     xAxis: {
                                         categories: categories
@@ -204,7 +208,12 @@ $(function(){
                                     yAxis: {
                                         min: 0,
                                         title: {
-                                            text: null
+                                            text: 'hi'
+                                        },
+                                        labels: {
+                                            formatter: function(){
+                                                return this.value + '%';
+                                            }
                                         }
                                     },
                                     tooltip: {
@@ -213,13 +222,64 @@ $(function(){
                                     plotOptions: {
                                         column: {
                                             pointPadding: 0.2,
-                                            borderWidth: 0
+                                            borderWidth: 0,
+                                            dataLabels: {
+                                                enabled: true,
+                                                formatter: function(){
+                                                    return (this.y < 1 ? this.y.toFixed(1) : this.y.toFixed(0)) + '%';
+                                                }
+                                            }
                                         }
                                     },
                                     series: [{
                                         name: 'Numero de personas en el hogar',
                                         data: series
 
+                                    }]
+                                });
+                                
+                                Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
+                                    return {
+                                        radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+                                        stops: [
+                                            [0, color],
+                                            [1, Highcharts.Color(color).brighten(-0.6).get('rgb')]
+                                        ]
+                                    };
+                                });
+                                
+                                $('#graphic_2').highcharts({
+                                    chart: {
+                                        plotBackgroundColor: null,
+                                        plotBorderWidth: null,
+                                        plotShadow: false
+                                    },
+                                    title: {
+                                        text: 'Diagrama circular del numero de personas en el hogar'
+                                    },
+                                    subtitle: {
+                                        text: 'Fte: Investigacion en clase de estadistica y probabilidad'
+                                    },
+                                    tooltip: {
+                                        enabled: false
+                                    },
+                                    plotOptions: {
+                                        pie: {
+                                            allowPointSelect: true,
+                                            cursor: 'pointer',
+                                            dataLabels: {
+                                                enabled: true,
+                                                color: '#000000',
+                                                connectorColor: '#000000',
+                                                formatter: function() {
+                                                    return '<b>'+ this.point.name +' Personas</b>: '+ (this.percentage < 1 ? this.percentage.toFixed(1) : this.percentage.toFixed(0)) +' %';
+                                                }
+                                            }
+                                        }
+                                    },
+                                    series: [{
+                                        type: 'pie',
+                                        data: pieSeries
                                     }]
                                 });
                             }
@@ -229,6 +289,37 @@ $(function(){
                             
                             Resident.pp.progressBar.tbProgressbar('option','value',100);
                         }
+                    });
+                }
+            },
+            general: {
+                onClickViewTable: function(){
+                    var html = '<div class="panel panel-default">' +
+                                    '<table class="table">' +
+                                        '<thead>' +
+                                            '<tr>' +
+                                                '<th>X<sub>i</sub></th>' +
+                                                '<th>n<sub>i</sub></th>' +
+                                                '<th>h<sub>i</sub></th>' +
+                                                '<th>N<sub>i</sub></th>' +
+                                                '<th>H<sub>i</sub></th>' +
+                                            '</tr>' +
+                                        '</thead>';
+                    
+                    $.each(Resident.pp.tableInfo, function(i, row){
+                        
+                    });
+                    
+                    html += '</table>' + 
+                            '<div>';
+                    
+                    $.xBModal({
+                        title: 'Tabla de distribuci&oacute;n de frecuencias',
+                        content: html,
+                        closeThick: true,
+                        closeOnEscape: true,
+                        width: '30%',
+                        me: Resident
                     });
                 }
             }

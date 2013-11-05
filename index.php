@@ -54,6 +54,9 @@
         <!-- INCLUDE JS FILES -->
         <script src="assets/libraries/jquery.10.js"></script>
         <script src="assets/libraries/jquery.widget.js"></script>
+        <script src="assets/js/functions.js"></script>
+        <script src="assets/libraries/xstrap/xBootstrapAlert.js"></script>
+        <script src="assets/libraries/xstrap/xBootstrapModal.js"></script>
         <script src="assets/js/Global.js"></script>
         <script src="assets/libraries/DB.js"></script>
         <script src="assets/libraries/highcharts/js/highcharts.js"></script>

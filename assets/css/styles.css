@@ -69,3 +69,19 @@
 #main_panel_resident #wrap_itc{
     height: 270px;
 }
+
+#main_panel #wrap_resident_graphics .panel_graphic{
+    float: left;
+    width: 49.5%;
+    min-height: 250px;
+    padding: 15px 5px 15px 4px;
+}
+
+#main_panel #wrap_resident_graphics .panel_graphic:nth-child(odd){
+    margin-right: 1%;
+}
+
+#main_panel .reset_jumbotron{
+    padding: 6px;
+    margin: 0;
+}
