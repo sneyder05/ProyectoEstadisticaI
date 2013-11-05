@@ -117,7 +117,7 @@ $(function(){
                                             mediana = (Xn2.RESIDENT + Xn2_1.RESIDENT) / 2;
                                         }
                                         else{
-                                            mediana = SQLRs.rows.item(((tamanoN + 1) / 2) - 1);
+                                            mediana = SQLRs.rows.item(((tamanoN + 1) / 2) - 1).RESIDENT;
                                         }
                                     }
                                     catch(err){
