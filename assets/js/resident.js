@@ -179,6 +179,7 @@ $(function(){
                             if(SQLRs.rows.length > 0){
                                 var categories = [], series = [], pieSeries = [];
                                 
+                                var Hi = 0;
                                 for(var i = 0; i < SQLRs.rows.length; i++){
                                     var row = SQLRs.rows.item(i);
                                     var resident = row.RESIDENT;
@@ -234,18 +235,7 @@ $(function(){
                                     series: [{
                                         name: 'Numero de personas en el hogar',
                                         data: series
-
                                     }]
-                                });
-                                
-                                Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
-                                    return {
-                                        radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
-                                        stops: [
-                                            [0, color],
-                                            [1, Highcharts.Color(color).brighten(-0.6).get('rgb')]
-                                        ]
-                                    };
                                 });
                                 
                                 $('#graphic_2').highcharts({
@@ -304,13 +294,35 @@ $(function(){
                                                 '<th>N<sub>i</sub></th>' +
                                                 '<th>H<sub>i</sub></th>' +
                                             '</tr>' +
-                                        '</thead>';
+                                        '</thead>' +
+                                        '<tbody>';
                     
+                    var Ni = 0, Hi = 0;
+                    var niTotal = 0;
                     $.each(Resident.pp.tableInfo, function(i, row){
+                        Ni += row[1];
+                        Hi += row[2];
+                        var hi = row[2];
                         
+                        html += '<tr>' +
+                                    '<td>' + row[0] + '</td>' +
+                                    '<td>' + row[1] +'</td>' +
+                                    '<td>' + ((hi < 1 ? hi.toFixed(1) : hi.toFixed(1)) + '%') +'</td>' +
+                                    '<td>' + Ni + '</td>' +
+                                    '<td>' + ((Hi < 1 ? Hi.toFixed(1) : Hi.toFixed(1)) + '%') + '</td>' +
+                                '</tr>';
+                        
+                        niTotal += row[1];
                     });
                     
-                    html += '</table>' + 
+                    html += '<tr>' +
+                                '<th>Total</th>' +
+                                '<th>' + niTotal + '</th>' +
+                                '<th>100%</th>' +
+                                '<th colspan="2">&nbsp;</th>' +
+                            '</tr>' +
+                            '</tbody>'+
+                            '</table>' + 
                             '<div>';
                     
                     $.xBModal({
