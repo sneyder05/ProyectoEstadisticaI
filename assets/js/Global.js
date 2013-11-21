@@ -66,5 +66,10 @@ Int = {
             }
             return 'El conjunto de datos investigado tienen asimetria ' + (val < 0 ? 'negativa' : 'positiva');
         }
+    },
+    Educ: {
+        Moda: function(val){
+            return 'De los hogares encuestados, el nivel de educacion mas frecuente es {VAL}.'.replace(/\{VAL\}/g, val);
+        }
     }
 };

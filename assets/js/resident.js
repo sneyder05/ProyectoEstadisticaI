@@ -140,7 +140,7 @@ $(function(){
                         Resident.pp.progressBar.tbProgressbar('option','value',20);
                         
                         $.DB.execute({
-                            sql: 'SELECT RESIDENT,COUNT(RESIDENT) AS MODA FROM DATOS_EST GROUP BY RESIDENT HAVING COUNT(RESIDENT) = (SELECT COUNT(RESIDENT) FROM DATOS_EST GROUP BY RESIDENT LIMIT 1)',
+                            sql: 'SELECT RESIDENT,COUNT(RESIDENT) AS MODA FROM DATOS_EST GROUP BY RESIDENT ORDER BY COUNT(RESIDENT) DESC',
                             onSuccess: function(SQLTr, SQLRs){
                                 if(SQLRs.rows.length > 0){
                                     var row = SQLRs.rows.item(0);

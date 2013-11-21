@@ -30,6 +30,7 @@
                             <li class="active"><a href="javascript:" data-for="index">Inicio</a></li>
                             <li><a href="javascript:" data-for="edad.html">Cuantitativa Continua</a></li>
                             <li><a href="javascript:" data-for="resident.html">Cuantitativa Discreta</a></li>
+                            <li><a href="javascript:" data-for="educ.html">Cualitativa Ordinal</a></li>
                             <li><a href="javascript:" data-for="acercade.html">Acerca de...</a></li>
                         </ul>
                     </div>
